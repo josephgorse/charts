@@ -6,10 +6,10 @@ kind: VolumeSnapshotLocation
 metadata:
   name: default
   labels:
-    chart: {{ template "velero.chart" $root }}
-    heritage: {{ $root.Release.Service }}
-    release: {{ $root.Release.Name }}
-    app: {{ template "velero.name" $root }}
+    app.kubernetes.io/name: {{ include "velero.name" . }}
+    app.kubernetes.io/instance: {{ .Release.Name }}
+    app.kubernetes.io/managed-by: {{ .Release.Service }}
+    helm.sh/chart: {{ include "velero.chart" . }}
 spec:
   provider: {{ .name  }}
   objectStorage:
